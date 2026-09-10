@@ -5,13 +5,14 @@ services:
       dockerfile: docker/Dockerfile
     volumes:
       - .:/var/www/html         # code source montÃ©
+      - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     networks:
       - laravel
 
   nginx:
     image: nginx:alpine
     ports:
-      - "8080:80"               # port hÃ´te:port conteneur
+      - "8004:80"               # port hÃ´te:port conteneur
     volumes:
       - .:/var/www/html
       - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
@@ -31,6 +32,18 @@ services:
       - mysql_data:/var/lib/mysql   # volume nommÃ© pour persister les donnÃ©es
     networks:
       - laravel
+  node:
+    build: # utiliser le dockerfile
+        context: .
+        dockerfile: docker/node/Dockerfile
+    working_dir: /app
+    volumes:
+        - .:/app
+        - ~/.ssh:/root/.ssh:ro
+    entrypoint: ["tail", "-f", "/dev/null"]
+    networks:
+        - laravel
+
 
 volumes:
   mysql_data:                   # volume nommÃ© dÃ©clarÃ© ici
