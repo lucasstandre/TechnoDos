@@ -99,7 +99,6 @@ jobs:
           LARAVEL_CLOUD_TOKEN: ${{ secrets.LARAVEL_CLOUD_TOKEN }}
         run: |
           export PATH="$(composer global config bin-dir --absolute):$PATH"
-          cloud auth:token --add "$LARAVEL_CLOUD_TOKEN"
           cloud deploy --environment="staging"
 
 
