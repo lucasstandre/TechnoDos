@@ -83,7 +83,6 @@
     "json-parse-even-better-errors": "^2.3.1",
     "json-schema-traverse": "^1.0.0",
     "lightningcss": "^1.32.0",
-    "lightningcss-linux-x64-gnu": "^1.32.0",
     "lines-and-columns": "^1.2.4",
     "magic-string": "^0.30.21",
     "mimic-fn": "^2.1.0",
