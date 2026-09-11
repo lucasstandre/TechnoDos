@@ -32,4 +32,4 @@ cloud environment:variables \
   --value=production
 
 # 5. Trigger the initial deployment
-cloud deploy --environment="production"
+cloud deploy production
