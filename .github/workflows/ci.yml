@@ -100,6 +100,10 @@ jobs:
         run: |
           export PATH="$(composer global config bin-dir --absolute):$PATH"
           cloud deploy staging
+      - name: Smoke test
+        run: |
+          sleep 5 # laisser le temps à l'app de redémarrer
+          curl -f http://${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PORT }}/health || exit 1
 
 
 
