@@ -99,7 +99,7 @@ jobs:
           LARAVEL_CLOUD_TOKEN: ${{ secrets.LARAVEL_CLOUD_TOKEN }}
         run: |
           export PATH="$(composer global config bin-dir --absolute):$PATH"
-          cloud deploy staging
+          cloud deploy production
       - name: Smoke test
         run: |
           sleep 5 # laisser le temps à l'app de redémarrer
