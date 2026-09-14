@@ -80,6 +80,6 @@ jobs:
         run: composer audit --abandoned=ignore --ignore-severity=low,moderate # pour ignorer lerreur
       - name: Smoke test
         run: |
-          sleep 5 # laisser le temps à l'app de redémarrer
+          sleep 20 # laisser le temps à l'app de redémarrer
           curl -f https://${{ secrets.DEPLOY_HOST }}/health || exit 1
 
