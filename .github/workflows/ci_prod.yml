@@ -80,6 +80,7 @@ jobs:
   deploy-prod:
     runs-on: ubuntu-latest
     needs: [ tests ]
+    environment: production
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout du code
@@ -102,7 +103,7 @@ jobs:
       - name: Smoke test
         run: |
           sleep 5 # laisser le temps à l'app de redémarrer
-          curl -f https://${{ secrets.DEPLOY_HOST_PROD }}/health || exit 1
+          curl -f https://${{ secrets.DEPLOY_HOST }}/health || exit 1
 
 
 
