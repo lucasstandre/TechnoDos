@@ -1,4 +1,4 @@
-name: CI Laravel
+name: CI Laravel Stagging
 
 on:
   push:

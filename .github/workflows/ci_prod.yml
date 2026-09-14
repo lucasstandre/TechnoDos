@@ -1,4 +1,4 @@
-name: CI Laravel
+name: CI Laravel prod
 
 on:
   push:
