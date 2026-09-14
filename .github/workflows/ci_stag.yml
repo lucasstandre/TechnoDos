@@ -1,4 +1,4 @@
-name: CI Laravel
+name: CI Laravel Stagging
 
 on:
   push:
@@ -46,6 +46,7 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     needs: [ lint, analyse ]
+    environment: staging
     steps:
       - name: Checkout du code
         uses: actions/checkout@v4
@@ -79,8 +80,6 @@ jobs:
         run: composer audit --abandoned=ignore --ignore-severity=low,moderate # pour ignorer lerreur
       - name: Smoke test
         run: |
-          sleep 5 # laisser le temps à l'app de redémarrer
-          curl -f https://${{ secrets.DEPLOY_HOST_STAG }}/health || exit 1
-
-
+          sleep 20 # laisser le temps à l'app de redémarrer
+          curl -f https://${{ secrets.DEPLOY_HOST }}/health || exit 1
 

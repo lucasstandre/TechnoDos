@@ -1,4 +1,4 @@
-name: CI Laravel
+name: CI Laravel prod
 
 on:
   push:
@@ -77,11 +77,11 @@ jobs:
       - name: Audit des dependances
         continue-on-error: true # continue si ya pas de wifi (merge dans le main)
         run: composer audit --abandoned=ignore --ignore-severity=low,moderate # pour ignorer lerreur
-  deploy-staging:
+  deploy-prod:
     runs-on: ubuntu-latest
     needs: [ tests ]
+    environment: production
     if: github.ref == 'refs/heads/main'
-    environment: staging
     steps:
       - name: Checkout du code
         uses: actions/checkout@v4
@@ -99,11 +99,11 @@ jobs:
           LARAVEL_CLOUD_TOKEN: ${{ secrets.LARAVEL_CLOUD_TOKEN }}
         run: |
           export PATH="$(composer global config bin-dir --absolute):$PATH"
-          cloud deploy staging
+          cloud deploy production
       - name: Smoke test
         run: |
           sleep 5 # laisser le temps à l'app de redémarrer
-          curl -f https://${{ secrets.DEPLOY_HOST_PROD }}/health || exit 1
+          curl -f https://${{ secrets.DEPLOY_HOST }}/health || exit 1
 
 
 
