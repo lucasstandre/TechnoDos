@@ -79,13 +79,7 @@ jobs:
         continue-on-error: true # continue si ya pas de wifi (merge dans le main)
         run: composer audit --abandoned=ignore --ignore-severity=low,moderate # pour ignorer lerreur
       - name: Smoke test
-        env:
-          HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
-          if [ -z "$HOST" ]; then
-            echo "ERREUR : Le secret DEPLOY_HOST est vide ou introuvable !"
-            exit 1
-          fi
-          sleep 5
-          curl -f "https://$HOST/health" || exit 1
+          sleep 5 # laisser le temps à l'app de redémarrer
+          curl -f https://${{ secrets.DEPLOY_HOST }}/health || exit 1
 
